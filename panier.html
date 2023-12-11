@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+   header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    border: solid 1px black;
+    border-radius: 10px;
+    text-align: center;
+     padding: 5px;
+   }
+   header img {
+    margin: auto;
+   }
+   header a span{
+   
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: orange;
+   }
+   header a{
+    text-decoration: none;
+    color: white;
+    
+   }
+    #cart {
+      max-width: 600px;
+      background-color: orange;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .item img {
+      max-width: 80px;
+      margin-right: 10px;
+    }
+
+    .quantity {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .quantity button {
+      cursor: pointer;
+      background: #eee;
+      border: none;
+      padding: 5px;
+      margin: 0 5px;
+      border-radius: 3px;
+    }
+
+    .like {
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .like.active {
+      color: red;
+    }
+
+    .total {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+ <header>
+  <img src="https://www.jumia.sn/assets_he/images/cart.668e6453.svg">
+  <h2>Votre panier est vide!</h2>
+  <p>Parcourez nos catégories et découvrez nos meilleures offres!</p>
+  <a href=""><span>COMMENCEZ VOS ACHATS</span></a>
+ </header>
+<div id="cart">
+  <div class="item">
+    <img src="https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/06/051121/1.jpg?5779" 
+     width="105" height="105">
+    <div class="info">
+      <h4>Nom Produit</h4>
+      <p class="price">Prix: 52 9000.00CFA</p>
+      <div class="quantity">
+        <button class="decrement">-</button>
+        <span class="quantity-value">1</span>
+        <button class="increment">+</button>
+      </div>
+      <span class="like">❤</span>
+      <button class="remove">Supprimer</button>
+    </div>
+  </div>
+
+  <div class="item">
+    <img src="https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/77/216201/1.jpg?4146" width="300" height="120">
+    <div class="info">
+      <h4>Nom Produit</h4>
+      <p class="price">Prix: 13 200.00 CFA</p>
+      <div class="quantity">
+        <button class="decrement">-</button>
+        <span class="quantity-value">1</span>
+        <button class="increment">+</button>
+      </div>
+      <span class="like">❤</span>
+      <button class="remove">Supprimer</button>
+    </div>
+  </div>
+  <div class="item">
+    <img src="https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/17/502601/1.jpg?9556" width="300" height="130">
+    <div class="info">
+      <h4>Nom Produit</h4>
+      <p class="price">Prix: 5 950.00 CFA</p>
+      <div class="quantity">
+        <button class="decrement">-</button>
+        <span class="quantity-value">1</span>
+        <button class="increment">+</button>
+      </div>
+      <span class="like">❤</span>
+      <button class="remove">Supprimer</button>
+    </div>
+  </div>
+  <div class="item">
+    <img src="https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/73/64379/1.jpg?7183" width="300" height="150">
+    <div class="info">
+      <h4>Nom Produit</h4>
+      <p class="price">Prix: 3 200.00 CFA</p>
+      <div class="quantity">
+        <button class="decrement">-</button>
+        <span class="quantity-value">1</span>
+        <button class="increment">+</button>
+      </div>
+      <span class="like">❤</span>
+      <button class="remove">Supprimer</button>
+    </div>
+  </div>
+  <div class="item">
+    <img src="https://sn.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/22/671401/1.jpg?8966" width="300" height="150">
+    <div class="info">
+      <h4>Nom Produit</h4>
+      <p class="price">Prix: 19 900.00 CFA</p>
+      <div class="quantity">
+        <button class="decrement">-</button>
+        <span class="quantity-value">1</span>
+        <button class="increment">+</button>
+      </div>
+      <span class="like">❤</span>
+      <button class="remove">Supprimer</button>
+    </div>
+  </div>
+
+  <div class="total">Total: CFA100 000.00</div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.item');
+    const totalElement = document.querySelector('.total');
+
+    items.forEach(item => {
+      const incrementButton = item.querySelector('.increment');
+      const decrementButton = item.querySelector('.decrement');
+      const quantityValue = item.querySelector('.quantity-value');
+      const likeButton = item.querySelector('.like');
+      const removeButton = item.querySelector('.remove');
+      const priceElement = item.querySelector('.price');
+
+      let quantity = parseInt(quantityValue.innerText);
+
+      incrementButton.addEventListener('click', function () {
+        quantity += 1;
+        updateQuantity();
+      });
+
+      decrementButton.addEventListener('click', function () {
+        if (quantity > 1) {
+          quantity -= 1;
+          updateQuantity();
+        }
+      });
+
+      likeButton.addEventListener('click', function () {
+        likeButton.classList.toggle('active');
+      });
+
+      removeButton.addEventListener('click', function () {
+        item.remove();
+        updateTotal();
+      });
+
+      function updateQuantity() {
+        quantityValue.innerText = quantity;
+        updateTotal();
+      }
+    });
+
+    function updateTotal() {
+      let totalPrice = 0;
+
+      items.forEach(item => {
+        const price = parseFloat(item.querySelector('.price').innerText.split('CFA')[1]);
+        const quantity = parseInt(item.querySelector('.quantity-value').innerText);
+        totalPrice += price * quantity;
+      });
+
+      totalElement.innerText = `Total: CFA${totalPrice.toFixed(2)}`;
+    }
+  });
+</script>
+
+</body>
+</html>
